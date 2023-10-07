@@ -1,13 +1,12 @@
-import { Fragment } from "react";
+import { Fragment, useCallback } from "react";
 import { useSelector } from 'react-redux';
 import { Square } from "./Sqare";
-import { Walls } from "./Walls";
-
+import { Walls } from "./Walls";;
 
 export const Board = () => {
     const size = useSelector((state) => state.board.size);
 
-    const renderBoard = () => {
+    const renderBoard = useCallback(() => {
         const board = [];
 
         for(let i = 0; i < size; i++) {
@@ -23,7 +22,7 @@ export const Board = () => {
         }
 
         return board;
-    }
+    }, [])
 
     return (
         <group>
