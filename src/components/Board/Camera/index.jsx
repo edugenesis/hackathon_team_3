@@ -8,7 +8,7 @@ import { changePlayer } from "../../../features/board_camera/slice";
 const displayGui = true;
 
 const lambda = 4;
-const dt = 0.03;
+const dt = 0.015;
 
 export const Camera = () => {
   const dispatch = useDispatch();

@@ -4,6 +4,7 @@ import { Square } from "./Sqare";
 import { Walls } from "./Walls";
 import {Camera} from './Camera'
 import {ActiveWall} from "./ActiveWall";
+import { Environment } from '@react-three/drei'
 
 export const Board = () => {
     const size = useSelector((state) => state.board.size);
@@ -42,7 +43,11 @@ export const Board = () => {
 
     return (
         <>
+            <Environment preset="dawn" /> {/* <- This line adds an environment */}
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
             <Camera/>
+
             <group>
                 {renderBoard()}
             </group>
