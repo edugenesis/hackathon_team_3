@@ -29,11 +29,19 @@ function App() {
             position: [4, 0]
         }));
         dispatch(setActivePlayer('player1'));
-        dispatch(start());
+        // dispatch(start());
     }, []);
 
+  const onStart = () => {
+    dispatch(start());
+  };
     return (
         <>
+      <div className={!game.isReady ? "loader-bg" : "loader-hidden"}>
+        <button className="start-game" onClick={onStart}>
+          Start the game
+        </button>
+      </div>
             <Canvas
                 camera={{
                     fov: 45,
