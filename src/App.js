@@ -3,8 +3,7 @@ import {Board} from "./components/Board";
 import { Player } from "./components/Player";
 import { useEffect, useRef } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addPlayer, setActivePlayer, start} from "./features/game/slice";
-import { changePlayer } from "./features/board_camera/slice";
+import {addPlayer, changeActivePlayer, setActivePlayer, start} from "./features/game/slice";
 import { PossibleMove } from './components/PossibleMoves'
 
 function App() {
@@ -15,9 +14,9 @@ function App() {
 
     useEffect(() => {
       if (currentActivePlayer.current === activePlayer) return;
-      dispatch(changePlayer());
-
-      currentActivePlayer.current = activePlayer;
+      setTimeout(() => {
+        currentActivePlayer.current = activePlayer;
+      }, 500);
     }, [activePlayer, dispatch]);
 
     useEffect(() => {
