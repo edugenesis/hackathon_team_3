@@ -17,12 +17,22 @@ export const ActiveWall = ({ xPosition, yPosition, horizontal }) => {
     const xPos = xStartVer + xPosition * (xStepVer);
     const zPos = yStartVer + yPosition * (yStepVer)-0.25;
 
-    const xPosHor = xStartHor + xPosition * (xStepHor);
+    const xPosHorOffsets = {
+        1: -0.35,
+        2: -0.28,
+        3: -0.17,
+        4: -0.09,
+        6: 0.1,
+        7: 0.17,
+        8: 0.28
+    }
+    const xPosHor = xStartHor + xPosition * (xStepHor) + (xPosHorOffsets[xPosition]??0);
+    console.log(horizontal, xPosition);
     const zPosHor = yStartHor + yPosition * (yStepHor);
 
     const rotation = horizontal ? [0, 0, 0] : [0, -Math.PI / 2, 0];
 
-    const final = horizontal ? [xPosHor, 1, zPosHor] : [xPos, 0.4, zPos];
+    const final = horizontal ? [xPosHor, 0.4, zPosHor] : [xPos, 0.4, zPos];
 
     return (
         <mesh
