@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useFrame } from "@react-three/fiber";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import * as T from "three";
 import GUI from "lil-gui";
 import { changePlayer } from "../../../features/board_camera/slice";
+
+const displayGui = true;
 
 const lambda = 4;
 const dt = 0.03;
@@ -28,15 +30,20 @@ export const Camera = () => {
     },
   };
 
-  const gui = new GUI();
-  gui.add(conf, "debugging");
-  gui.add(conf, "x");
-  gui.add(conf, "y");
-  gui.add(conf, "z");
-  gui.add(conf, "rotationX");
-  gui.add(conf, "rotationY");
-  gui.add(conf, "rotationZ");
-  gui.add(conf, "switch");
+  useEffect(() => {
+    if(!displayGui){
+      return;
+    }
+    const gui = new GUI();
+    gui.add(conf, "debugging");
+    gui.add(conf, "x");
+    gui.add(conf, "y");
+    gui.add(conf, "z");
+    gui.add(conf, "rotationX");
+    gui.add(conf, "rotationY");
+    gui.add(conf, "rotationZ");
+    gui.add(conf, "switch");
+  }, []);
 
   useFrame(({ camera }) => {
     const config = conf.debugging ? conf : boardCamera.position;
