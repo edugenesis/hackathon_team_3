@@ -72,10 +72,10 @@ export const Camera = () => {
 
   let forward = true;
   useFrame(({ camera }) => {
-    console.log(isGameReady);
+    // console.log(isGameReady);
     if (!isGameReady) {
       // console.log("not ready");
-      console.log(camera.position.z)
+      // console.log(camera.position.z)
       if (forward) {
         camera.position.z += 0.01;
       } else {
