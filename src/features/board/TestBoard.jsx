@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 
 import './styles.css';
 
-export function Board() {
+export function TestBoard() {
     const size = useSelector((state) => state.board.size);
 
     console.log('MY_REG size: ', size);
