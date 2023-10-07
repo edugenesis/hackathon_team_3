@@ -70,25 +70,41 @@ export const gameSlice = createSlice({
         },
         addActiveWall: (state, { payload }) => {
             const [newX, newY] = payload.position;
+            const newHorizontal = !!payload.horizontal;
 
-            const preventSetWall = [...state.activeWalls].some(({position: [x, y]}) => {
+            console.log('MY_REG newX: ', newX);
+            console.log('MY_REG newY: ', newY);
+            console.log('MY_REG newHorizontal: ', newHorizontal);
+
+            if (newX === 8 && !newHorizontal) {
+                console.log('MY_REG 666: ', 666);
+                return;
+            }
+
+            if (newY === 8 && newHorizontal) {
+                console.log('MY_REG 666: ', 666);
+                return;
+            }
+
+
+            const preventSetWall = [...state.activeWalls].some(({position: [x, y], horizontal}) => {
                 if (x === newX && y === newY) {
                     return true;
                 }
 
-                if (x + 1 === newX && y === newY) {
+                if (x + 1 === newX && y === newY && !horizontal && !newHorizontal) {
                     return true;
                 }
 
-                if (x === newX && y + 1 === newY) {
+                if (x - 1 === newX && y === newY && !horizontal && !newHorizontal) {
                     return true;
                 }
 
-                if (x - 1 === newX && y === newY) {
+                if (x === newX && y + 1 === newY && horizontal && newHorizontal) {
                     return true;
                 }
 
-                if (x === newX && y - 1 === newY) {
+                if (x === newX && y - 1 === newY && horizontal && newHorizontal) {
                     return true;
                 }
 

@@ -9,7 +9,7 @@ const yStepVer = 1.1;
 const xStartHor = -4.85;
 const xStepHor = 1;
 const yStartHor = -3.4;
-const yStepHor = 0.98;
+const yStepHor = 0.95;
 
 export const ActiveWall = ({ xPosition, yPosition, horizontal }) => {
     const colorMap = useLoader(TextureLoader, '/Rock022_1K-PNG_Color.webp')
@@ -26,9 +26,21 @@ export const ActiveWall = ({ xPosition, yPosition, horizontal }) => {
         7: 0.17,
         8: 0.28
     }
+
+    const yPosHorOffsets = {
+        0: -1.35,
+        1: -1.2,
+        2: -1,
+        3: -0.8,
+        4: -0.65,
+        5: -0.45,
+        6: -0.35,
+        7: -0.3,
+    }
+
     const xPosHor = xStartHor + xPosition * (xStepHor) + (xPosHorOffsets[xPosition]??0);
-    console.log(horizontal, xPosition);
-    const zPosHor = yStartHor + yPosition * (yStepHor);
+
+    const zPosHor = yStartHor + yPosition * (yStepHor) + (yPosHorOffsets[yPosition]??0);
 
     const rotation = horizontal ? [0, 0, 0] : [0, -Math.PI / 2, 0];
 
