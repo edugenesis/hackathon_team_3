@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
+import {useDispatch} from "react-redux";
+import {addActiveWall} from "../../../features/game/slice";
 
 export const Walls = ({ i, j, horizontal }) => {
-    const [userData, setUserData] = useState({ chessPosition: { row: 0, column: 0 }, ground: true, droppable: false });
-
-    useEffect(() => {
-        setUserData({ ...userData, position: { row: i, column: j } });
-    }, [i, j])
+    const dispatch = useDispatch();
 
     const xPos = 4 - i * (1 + 0.1);
     const zPos = 3 - j * (1 + 0.1);
@@ -15,10 +12,20 @@ export const Walls = ({ i, j, horizontal }) => {
 
     const final = horizontal ? [xPosHor, -0.4, zPosHor] : [xPos, -0.4, zPos];
 
+    const onClick = (data) => {
+        data.stopPropagation();
+        dispatch(addActiveWall({
+            position: data.object.userData,
+            horizontal
+        }))
+    }
+
     return (
         <mesh
-        position={final}
-        rotation={rotation}
+            position={final}
+            rotation={rotation}
+            onPointerDown={onClick}
+            userData={[8 - i, 8 - j]}
         >
             <boxGeometry attach="geometry" args={[0.1, 1, 1]} />
             <meshBasicMaterial attach="material" color={'#4475DD'} />

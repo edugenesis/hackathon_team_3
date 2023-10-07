@@ -7,6 +7,9 @@ import {ActiveWall} from "./ActiveWall";
 
 export const Board = () => {
     const size = useSelector((state) => state.board.size);
+    const activeWalls = useSelector((state) => state.game.activeWalls);
+    
+    console.log('MY_REG activeWalls: ', activeWalls);
 
     const renderBoard = () => {
         const board = [];
@@ -23,13 +26,16 @@ export const Board = () => {
             }
         }
 
-        board.push(
-            <ActiveWall key={'TEST'} xPosition={5} yPosition={1} />
-        )
-
-        board.push(
-            <ActiveWall key={'TEST2'} xPosition={3} yPosition={3} horizontal />
-        )
+        activeWalls.forEach((activeWall, index) => {
+            board.push(
+                <ActiveWall
+                    key={index}
+                    xPosition={activeWall.position[0]}
+                    yPosition={activeWall.position[1]}
+                    horizontal={activeWall.horizontal}
+                />
+            )
+        })
 
         return board;
     }

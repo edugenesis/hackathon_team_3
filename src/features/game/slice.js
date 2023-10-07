@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     isReady: false,
     players: [],
+    activeWalls: [],
 };
 
 export const gameSlice = createSlice({
@@ -31,7 +32,12 @@ export const gameSlice = createSlice({
         },
         setActivePlayer: (state, action) => {
             state.activePlayer = action.payload;
-        }
+        },
+        addActiveWall: (state, action) => {
+            // TODO: чекнути чи можна ставити стіну
+            console.log('MY_REG action: ', action);
+            state.activeWalls.push(action.payload)
+        },
     },
 });
 
@@ -39,6 +45,7 @@ export const {
     start,
     addPlayer ,
     setActivePlayer,
+    addActiveWall,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -1,9 +1,9 @@
 const xStartVer = -4.1;
 const xStepVer = 1.06;
-const yStartVer = -4.4;
+const yStartVer = -5.5;
 const yStepVer = 1.1;
 
-const xStartHor = -3.85;
+const xStartHor = -4.85;
 const xStepHor = 1;
 const yStartHor = -3.4;
 const yStepHor = 0.98;
