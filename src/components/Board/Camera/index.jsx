@@ -77,9 +77,11 @@ export const Camera = () => {
       // console.log("not ready");
       // console.log(camera.position.z)
       if (forward) {
-        camera.position.z += 0.01;
+        camera.position.z += 0.002;
+        camera.rotation.x -= 0.0001;
       } else {
-        camera.position.z -= 0.01;
+        camera.position.z -= 0.002;
+        camera.rotation.x += 0.0001;
       }
 
       if (camera.position.z > 9) {
