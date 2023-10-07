@@ -20,6 +20,7 @@ export const Square = ({ i, j }) => {
     const zPos = 3.5- j * (1 + 0.1);
 
     const handleSquareClick = (e) => {
+        e.stopPropagation();
         if (!possibleMoves.length) return;
         
         dispatch(setPlayerMove(e.object.userData.position))

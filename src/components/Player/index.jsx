@@ -25,7 +25,7 @@ export const Player = ({ isSecondPlayer, playerName }) => {
     }, [y]);
 
     const handlePlayerClick = (event) => {
-        console.log('event :>> ', event.object);
+        event.stopPropagation();
         if (activePlayer !== playerName) return;
 
         dispatch(getPossibleMoves({ playerName }))
