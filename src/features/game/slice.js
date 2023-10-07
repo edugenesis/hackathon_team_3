@@ -36,6 +36,11 @@ export const gameSlice = createSlice({
         setActivePlayer: (state, { payload }) => {
             state.activePlayer = payload;
         },
+        changeActivePlayer: (state) => {
+            const activePlayerIndex = state.players.indexOf(state.activePlayer);
+            const newActivePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
+            state.activePlayer = state.players[newActivePlayerIndex];
+        },
         getPossibleMoves: (state, action) => {
             const currentPlayerPosition = state[action.payload.playerName];
             const row = currentPlayerPosition.position[0];
@@ -92,7 +97,6 @@ export const gameSlice = createSlice({
 
             if (!preventSetWall) {
                 const activePlayerIndex = state.players.indexOf(state.activePlayer);
-
                 const newActivePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
 
                 state.activeWalls.push(payload);
@@ -111,6 +115,7 @@ export const {
     addActiveWall,
     getPossibleMoves,
     setPlayerMove,
+    changeActivePlayer,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

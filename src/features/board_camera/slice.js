@@ -27,9 +27,6 @@ export const boardCameraSlice = createSlice({
   name: "board_camera",
   initialState,
   reducers: {
-    resetPlayer: (state) => {
-      state = initialState;
-    },
     changePlayer: (state) => {
       if (state.positionStr === "p1Camera") {
         state.position = p2Camera;
@@ -42,6 +39,6 @@ export const boardCameraSlice = createSlice({
   },
 });
 
-export const { resetPlayer, changePlayer } = boardCameraSlice.actions;
+export const { changePlayer } = boardCameraSlice.actions;
 
 export default boardCameraSlice.reducer;

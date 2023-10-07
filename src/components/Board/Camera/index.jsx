@@ -4,17 +4,42 @@ import { useMemo, useEffect } from "react";
 import * as T from "three";
 import GUI from "lil-gui";
 import { changePlayer } from "../../../features/board_camera/slice";
+import {changeActivePlayer} from "../../../features/game/slice";
 
 const displayGui = true;
 
 const lambda = 4;
 const dt = 0.015;
 
+const p1Camera = {
+  x: 0,
+  y: 8,
+  z: 10,
+  rotationX: -0.2,
+  rotationY: 0,
+  rotationZ: 0,
+};
+
+const p2Camera = {
+  x: 0,
+  y: 8,
+  z: -10,
+  rotationX: -0.75,
+  rotationY: 0,
+  rotationZ: 1,
+};
+
 export const Camera = () => {
   const dispatch = useDispatch();
   const camObj = useMemo(() => new T.Object3D(), []);
 
-  const boardCamera = useSelector((state) => state.board_camera);
+  const players = useSelector((state) => state.game.players);
+  const activePlayer = useSelector((state) => state.game.activePlayer);
+  const activePlayerIndex = players.indexOf(activePlayer);
+
+  const boardCameraPosition = useMemo(() => {
+    return activePlayerIndex === 0 ? p1Camera : p2Camera;
+  }, [activePlayerIndex])
 
   let conf = {
     debugging: false,
@@ -26,7 +51,7 @@ export const Camera = () => {
     rotationZ: 0,
     switch: () => {
       conf.debugging = false;
-      dispatch(changePlayer())
+      dispatch(changeActivePlayer())
     },
   };
 
@@ -46,7 +71,7 @@ export const Camera = () => {
   }, []);
 
   useFrame(({ camera }) => {
-    const config = conf.debugging ? conf : boardCamera.position;
+    const config = conf.debugging ? conf : boardCameraPosition;
     camObj.position.x = T.MathUtils.damp(
       camObj.position.x,
       config.x,
