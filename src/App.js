@@ -9,8 +9,6 @@ function App() {
     const dispatch = useDispatch();
     const game = useSelector((state) => state.game);
 
-    console.log('MY_REG game: ', game);
-
     useEffect(() => {
         dispatch(addPlayer({
             name: 'player1',
@@ -34,8 +32,8 @@ function App() {
                     position: [ 0, 7, 8 ],
                 }}>
                 <Board/>
-                <Player />
-                <Player isSecondPlayer/>
+                <Player playerName="player1" />
+                <Player playerName="player2" isSecondPlayer/>
             </Canvas>
         </>
     );
