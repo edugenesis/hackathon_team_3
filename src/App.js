@@ -1,8 +1,9 @@
+import {Board} from "./features/board/Board";
 
 function App() {
   return (
     <div className="App">
-      Main
+        <Board />
     </div>
   );
 }
