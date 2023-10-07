@@ -21,7 +21,7 @@ export const Walls = ({ i, j, horizontal }) => {
         rotation={rotation}
         >
             <boxGeometry attach="geometry" args={[0.1, 1, 1]} />
-            <meshBasicMaterial attach="material" color={'#4475DD'} />
+            <meshStandardMaterial attach="material" color={'#966F33'} side={2} metalness={0.8} roughness={0.4} />
         </mesh>
     )
 }
