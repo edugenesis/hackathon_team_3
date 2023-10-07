@@ -31,7 +31,7 @@ export const boardCameraSlice = createSlice({
       state = initialState;
     },
     changePlayer: (state) => {
-      if (state.positionStr == "p1Camera") {
+      if (state.positionStr === "p1Camera") {
         state.position = p2Camera;
         state.positionStr = "p2Camera";
       } else {
