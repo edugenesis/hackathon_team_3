@@ -16,6 +16,7 @@ function App() {
                 }}>
                 <Board/>
                 <Player />
+                <Player isSecondPlayer/>
             </Canvas>
             <div>Test app</div>
 
