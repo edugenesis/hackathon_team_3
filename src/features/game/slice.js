@@ -6,6 +6,7 @@ const initialState = {
     isReady: false,
     players: [],
     possibleMoves: [],
+    activeWalls: [{"position":[0,1]},{"position":[1,0],"horizontal":true}],
 };
 
 export const gameSlice = createSlice({
@@ -61,7 +62,12 @@ export const gameSlice = createSlice({
 
             state.possibleMoves = [];
             state.activePlayer = state.activePlayer === 'player1' ? 'player2' : 'player1';
-        }
+        },
+        addActiveWall: (state, action) => {
+            // TODO: чекнути чи можна ставити стіну
+            console.log('MY_REG action: ', action);
+            state.activeWalls.push(action.payload)
+        },
     },
 });
 
@@ -69,6 +75,7 @@ export const {
     start,
     addPlayer ,
     setActivePlayer,
+    addActiveWall,
     getPossibleMoves,
     setPlayerMove,
 } = gameSlice.actions;

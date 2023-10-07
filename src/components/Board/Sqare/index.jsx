@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from "react-redux";
 
 import { setPlayerMove } from '../../../features/game/slice';
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { useLoader } from '@react-three/fiber'
 
 export const Square = ({ i, j }) => {
     const dispatch = useDispatch();
+    const colorMap = useLoader(TextureLoader, '/Wood067_1K-PNG_Color.webp')
+
     const [userData, setUserData] = useState({ position: { row: 0, column: 0 }, ground: true, droppable: false });
     const { possibleMoves } = useSelector((state) => state.game);
 
@@ -29,7 +33,7 @@ export const Square = ({ i, j }) => {
         onPointerDown={handleSquareClick}
         >
           <planeGeometry attach="geometry" args={[1, 1, 1]}  />
-          <meshBasicMaterial attach="material" color={'#CFCFCF'} side={2} />
+          <meshStandardMaterial attach="material" color={'#966F33'} side={2} metalness={0.4} roughness={0.9} map={colorMap} />
         </mesh>
     )
 }
