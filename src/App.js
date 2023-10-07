@@ -15,9 +15,11 @@ function App() {
 
     useEffect(() => {
       if (currentActivePlayer.current === activePlayer) return;
-      dispatch(changePlayer());
+      setTimeout(() => {
+        dispatch(changePlayer());
 
-      currentActivePlayer.current = activePlayer;
+        currentActivePlayer.current = activePlayer;
+      }, 500);
     }, [activePlayer, dispatch]);
 
     useEffect(() => {
