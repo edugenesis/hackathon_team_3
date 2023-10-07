@@ -23,8 +23,9 @@ function App() {
                     position: [ 0, 7, 8 ],
                 }}>
                 <Board/>
+                <Player />
+                <Player isSecondPlayer/>
             </Canvas>
-            <Player />
         </>
     );
 }
