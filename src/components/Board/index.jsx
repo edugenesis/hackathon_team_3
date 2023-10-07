@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useSelector } from 'react-redux';
 import { Square } from "./Sqare";
 import { Walls } from "./Walls";
-
+import {Camera} from './Camera'
 
 export const Board = () => {
     const size = useSelector((state) => state.board.size);
@@ -26,8 +26,11 @@ export const Board = () => {
     }
 
     return (
-        <group>
-            {renderBoard()}
-        </group>
+        <>
+            <Camera/>
+            <group>
+                {renderBoard()}
+            </group>
+        </>
     )
 }
