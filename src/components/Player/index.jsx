@@ -5,7 +5,7 @@ const xStart = -4.8;
 const xStep = 1.1;
 
 const yStart = 3.4;
-const yStep = (3.4+5.4)/9;
+const yStep = 1.055;
 
 export const Player = ({ isSecondPlayer, playerName }) => {
     const [x, y] = useSelector((state) => state.game[playerName]);
