@@ -1,12 +1,20 @@
 import {Canvas} from '@react-three/fiber'
 import {Board} from "./components/Board";
-import {TestBoard} from "./features/board/TestBoard";
 import { Player } from "./components/Player";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {PlayerController} from "./features/player/Player";
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const player1 = new PlayerController();
+        const player2 = new PlayerController();
+    }, []);
+
     return (
         <>
-            <div>Main app</div>
             <Canvas
                 camera={{
                     fov: 45,
@@ -17,9 +25,6 @@ function App() {
                 <Board/>
             </Canvas>
             <Player />
-            <div>Test app</div>
-
-            <TestBoard />
         </>
     );
 }
