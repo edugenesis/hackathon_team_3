@@ -8,7 +8,7 @@ const yStart = 3.4;
 const yStep = 1.055;
 
 export const Player = ({ isSecondPlayer, playerName }) => {
-    const [x, y] = useSelector((state) => state.game[playerName]);
+    const { position: [x, y] } = useSelector((state) => state.game[playerName]);
 
     const xPosition = useMemo(() => {
         return xStart + (xStep * (x));

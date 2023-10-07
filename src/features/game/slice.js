@@ -23,7 +23,10 @@ export const gameSlice = createSlice({
                     action.payload.name,
                 ];
 
-                state[action.payload.name] = action.payload.position;
+                state[action.payload.name] = {
+                    position: action.payload.position,
+                    wallsCount: 10
+                };
             }
         },
         setActivePlayer: (state, action) => {
