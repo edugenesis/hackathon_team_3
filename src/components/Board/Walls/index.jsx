@@ -28,7 +28,7 @@ export const Walls = ({ i, j, horizontal }) => {
             userData={[8 - i, 8 - j]}
         >
             <boxGeometry attach="geometry" args={[0.1, 1, 1]} />
-            <meshStandardMaterial attach="material" color={'#966F33'} side={2} metalness={0.8} roughness={0.4} />
+            <meshStandardMaterial attach="material" color={'#3a290e'} side={2} metalness={0.8} roughness={0.4} />
         </mesh>
     )
 }
