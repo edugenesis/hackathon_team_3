@@ -87,20 +87,17 @@ export const gameSlice = createSlice({
             state.activePlayer = state.activePlayer === 'player1' ? 'player2' : 'player1';
         },
         addActiveWall: (state, { payload }) => {
+            if (state[state.activePlayer].wallsCount === 0) {
+                return;
+            }
             const [newX, newY] = payload.position;
             const newHorizontal = !!payload.horizontal;
 
-            console.log('MY_REG newX: ', newX);
-            console.log('MY_REG newY: ', newY);
-            console.log('MY_REG newHorizontal: ', newHorizontal);
-
             if (newX === 8 && !newHorizontal) {
-                console.log('MY_REG 666: ', 666);
                 return;
             }
 
             if (newY === 8 && newHorizontal) {
-                console.log('MY_REG 666: ', 666);
                 return;
             }
 
@@ -130,14 +127,13 @@ export const gameSlice = createSlice({
             });
 
             if (!preventSetWall) {
+                state[state.activePlayer].wallsCount -= 1;
                 const activePlayerIndex = state.players.indexOf(state.activePlayer);
                 const newActivePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
 
                 state.activeWalls.push(payload);
                 state.activePlayer = state.players[newActivePlayerIndex];
                 state.possibleMoves = [];
-            } else {
-                console.log('MY_REG 666: ', 666);
             }
         }
     },

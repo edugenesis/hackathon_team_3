@@ -8,10 +8,6 @@ const yStart = 3.4;
 const yStep = 1.055;
 
 export const PossibleMove = ({ x, y }) => {
-    const game = useSelector((state) => state.game);
-
-    console.log('game :>> ', game);
-
     const xPosition = useMemo(() => {
         return xStart + (xStep * (x));
     }, []);
