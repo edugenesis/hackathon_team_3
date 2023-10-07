@@ -3,7 +3,7 @@ import {Board} from "./components/Board";
 import { Player } from "./components/Player";
 import { useEffect, useRef } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addPlayer, changeActivePlayer, setActivePlayer, start} from "./features/game/slice";
+import {addPlayer, setActivePlayer, start} from "./features/game/slice";
 import { PossibleMove } from './components/PossibleMoves'
 
 function App() {
@@ -29,11 +29,19 @@ function App() {
             position: [4, 0]
         }));
         dispatch(setActivePlayer('player1'));
-        dispatch(start());
+        // dispatch(start());
     }, []);
 
+  const onStart = () => {
+    dispatch(start());
+  };
     return (
         <>
+      <div className={!game.isReady ? "loader-bg" : "loader-hidden"}>
+        <button className="start-game" onClick={onStart}>
+          Start the game
+        </button>
+      </div>
             <Canvas
                 camera={{
                     fov: 45,

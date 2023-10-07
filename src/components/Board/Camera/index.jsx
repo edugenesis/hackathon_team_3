@@ -3,9 +3,9 @@ import { useFrame } from "@react-three/fiber";
 import { useMemo, useEffect } from "react";
 import * as T from "three";
 import GUI from "lil-gui";
-import {changeActivePlayer} from "../../../features/game/slice";
+import { changeActivePlayer } from "../../../features/game/slice";
 
-const displayGui = true;
+const displayGui = false;
 
 const lambda = 4;
 const dt = 0.015;
@@ -33,12 +33,13 @@ export const Camera = () => {
   const camObj = useMemo(() => new T.Object3D(), []);
 
   const players = useSelector((state) => state.game.players);
+  const isGameReady = useSelector((state) => state.game.isReady);
   const activePlayer = useSelector((state) => state.game.activePlayer);
   const activePlayerIndex = players.indexOf(activePlayer);
 
   const boardCameraPosition = useMemo(() => {
     return activePlayerIndex === 0 ? p1Camera : p2Camera;
-  }, [activePlayerIndex])
+  }, [activePlayerIndex]);
 
   let conf = {
     debugging: false,
@@ -50,12 +51,12 @@ export const Camera = () => {
     rotationZ: 0,
     switch: () => {
       conf.debugging = false;
-      dispatch(changeActivePlayer())
+      dispatch(changeActivePlayer());
     },
   };
 
   useEffect(() => {
-    if(!displayGui){
+    if (!displayGui) {
       return;
     }
     const gui = new GUI();
@@ -69,7 +70,31 @@ export const Camera = () => {
     gui.add(conf, "switch");
   }, []);
 
+  let forward = true;
   useFrame(({ camera }) => {
+    // console.log(isGameReady);
+    if (!isGameReady) {
+      // console.log("not ready");
+      // console.log(camera.position.z)
+      if (forward) {
+        camera.position.z += 0.002;
+        camera.rotation.x -= 0.0001;
+      } else {
+        camera.position.z -= 0.002;
+        camera.rotation.x += 0.0001;
+      }
+
+      if (camera.position.z > 9) {
+        forward = false;
+      } else if (camera.position.z < 6) {
+        forward = true;
+      }
+      return;
+
+      // just rotate the camera
+      // camObj.rotation.y += 0.01;
+      // return;
+    }
     const config = conf.debugging ? conf : boardCameraPosition;
     camObj.position.x = T.MathUtils.damp(
       camObj.position.x,
