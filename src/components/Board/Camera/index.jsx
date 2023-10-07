@@ -5,7 +5,7 @@ import * as T from "three";
 import GUI from "lil-gui";
 import { changeActivePlayer } from "../../../features/game/slice";
 
-const displayGui = true;
+const displayGui = false;
 
 const lambda = 4;
 const dt = 0.015;
