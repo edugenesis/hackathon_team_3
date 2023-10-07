@@ -11,17 +11,19 @@ const yStep = 1.055;
 export const Player = ({ isSecondPlayer, playerName }) => {
     const dispatch = useDispatch();
     const { position: [x, y] } = useSelector((state) => state.game[playerName]);
+    const { activePlayer } = useSelector((state) => state.game);
 
     const xPosition = useMemo(() => {
         return xStart + (xStep * (x));
-    }, []);
+    }, [x]);
 
     const yPosition = useMemo(() => {
         return yStart - (yStep * (8 - y));
-    }, []);
+    }, [y]);
 
     const handlePlayerClick = (event) => {
         console.log('event :>> ', event.object);
+        if (activePlayer !== playerName) return;
 
         dispatch(getPossibleMoves({ playerName }))
     };

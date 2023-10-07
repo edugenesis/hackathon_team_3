@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const directions = [
-    { row: -1, column: 0 },
-    { row: 1, column: 0 },
-    { row: 0, column: -1 },
-    { row: 0, column: 1 },
-]
+import { directions } from './constants';
 
 const initialState = {
     isReady: false,
@@ -42,9 +37,8 @@ export const gameSlice = createSlice({
         },
         getPossibleMoves: (state, action) => {
             const currentPlayerPosition = state[action.payload.playerName];
-
-            const row = currentPlayerPosition[0];
-            const column = currentPlayerPosition[1];
+            const row = currentPlayerPosition.position[0];
+            const column = currentPlayerPosition.position[1];
             
             for (const direction of directions) {
                 const newRow = row + direction.row;
@@ -55,6 +49,18 @@ export const gameSlice = createSlice({
                     state.possibleMoves = [...state.possibleMoves, newPossibleMove]
                 }
             }
+        },
+        setPlayerMove: (state, action) => {
+            const currentPlayer = state[state.activePlayer];
+            const isUserClickingOnPossibleMove = state.possibleMoves.some(move => 
+                move.row === action.payload.row && move.column === action.payload.column);
+
+            if (!isUserClickingOnPossibleMove) return
+
+            currentPlayer.position = [action.payload.row, action.payload.column];
+
+            state.possibleMoves = [];
+            state.activePlayer = state.activePlayer === 'player1' ? 'player2' : 'player1';
         }
     },
 });
@@ -64,6 +70,7 @@ export const {
     addPlayer ,
     setActivePlayer,
     getPossibleMoves,
+    setPlayerMove,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
