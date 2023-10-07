@@ -1,13 +1,15 @@
 import {useSelector} from "react-redux";
 
+import './styles.css';
+
 export function Board() {
     const size = useSelector((state) => state.board.size);
-    
+
     console.log('MY_REG size: ', size);
 
     return (
         <table id='board'>
-
+            <tbody>
             <tr>
                 <td data-pos='0'></td>
                 <td data-pos='0-1' className='wallPlacementVert'></td>
@@ -321,7 +323,7 @@ export function Board() {
                 <td className='crossSpace'></td>
                 <td data-pos='71-80' className='wallPlacementHoriz_NOHOVER'></td>
             </tr>
-            
+
             <tr>
                 <td data-pos='72'></td>
                 <td data-pos='72-73' className='wallPlacementVert_NOHOVER'></td>
@@ -343,6 +345,7 @@ export function Board() {
                 <td data-pos='79-80' className='wallPlacementVert_NOHOVER'></td>
                 <td data-pos='80'></td>
             </tr>
+            </tbody>
         </table>
     )
 }
