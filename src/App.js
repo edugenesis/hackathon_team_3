@@ -15,8 +15,8 @@ function App() {
                     position: [ 0, 7, 8 ],
                 }}>
                 <Board/>
+                <Player />
             </Canvas>
-            <Player />
             <div>Test app</div>
 
             <TestBoard />
