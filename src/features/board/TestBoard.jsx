@@ -1,14 +1,17 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import './styles.css';
 
 export function TestBoard() {
     const size = useSelector((state) => state.board.size);
+    const dispatch = useDispatch();
 
-    console.log('MY_REG size: ', size);
+    const testHandler = () => {
+
+    }
 
     return (
-        <table id='board'>
+        <table id='board' onClick={testHandler}>
             <tbody>
             <tr>
                 <td data-pos='0'></td>
