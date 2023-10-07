@@ -10,7 +10,7 @@ const yStepHor = 0.98;
 
 export const ActiveWall = ({ xPosition, yPosition, horizontal }) => {
     const xPos = xStartVer + xPosition * (xStepVer);
-    const zPos = yStartVer + yPosition * (yStepVer);
+    const zPos = yStartVer + yPosition * (yStepVer)-0.25;
 
     const xPosHor = xStartHor + xPosition * (xStepHor);
     const zPosHor = yStartHor + yPosition * (yStepHor);
