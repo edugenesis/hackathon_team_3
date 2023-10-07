@@ -3,7 +3,6 @@ import { useFrame } from "@react-three/fiber";
 import { useMemo, useEffect } from "react";
 import * as T from "three";
 import GUI from "lil-gui";
-import { changePlayer } from "../../../features/board_camera/slice";
 import {changeActivePlayer} from "../../../features/game/slice";
 
 const displayGui = true;
