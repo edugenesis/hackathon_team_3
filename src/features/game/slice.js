@@ -43,6 +43,7 @@ export const gameSlice = createSlice({
         },
         getPossibleMoves: (state, action) => {
             const currentPlayerPosition = state[action.payload.playerName];
+            const enemyPlayer = state[state.activePlayer === 'player1' ? 'player2' : 'player1'];
             const row = currentPlayerPosition.position[0];
             const column = currentPlayerPosition.position[1];
 
@@ -51,8 +52,25 @@ export const gameSlice = createSlice({
                 const newColumn = column + direction.column;
 
                 if (newRow >= 0 && newRow <= 8 && newColumn >= 0 && newColumn <= 8) {
-                    const newPossibleMove = { row: newRow, column: newColumn };
-                    state.possibleMoves = [...state.possibleMoves, newPossibleMove]
+                    const isOtherPlayerOnNewPosition = enemyPlayer.position[0] === newRow && enemyPlayer.position[1] === newColumn;
+
+                    const isRow = direction.row !== 0;
+                    const isColumn = direction.column !== 0;
+
+                    if ((isRow && isOtherPlayerOnNewPosition) || (isColumn && isOtherPlayerOnNewPosition)) {
+                        const num = direction.row !== 0 ? (direction.row > 0 ? 1 : -1) : (direction.column > 0 ? 1 : -1);
+                        const newPossibleMove = {
+                            row: isRow ? newRow + num : newRow,
+                            column: isColumn ? newColumn + num : newColumn
+                        };
+                        state.possibleMoves = [...state.possibleMoves, newPossibleMove];
+                    } else {
+                        const newPossibleMove = {
+                            row: newRow,
+                            column: newColumn
+                        };
+                        state.possibleMoves = [...state.possibleMoves, newPossibleMove]; 
+                    }
                 }
             }
         },
@@ -101,6 +119,7 @@ export const gameSlice = createSlice({
 
                 state.activeWalls.push(payload);
                 state.activePlayer = state.players[newActivePlayerIndex];
+                state.possibleMoves = [];
             } else {
                 console.log('MY_REG 666: ', 666);
             }

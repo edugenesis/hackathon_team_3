@@ -3,7 +3,7 @@ import {Board} from "./components/Board";
 import { Player } from "./components/Player";
 import { useEffect, useRef } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addPlayer, changeActivePlayer, setActivePlayer, start} from "./features/game/slice";
+import {addPlayer, setActivePlayer, start} from "./features/game/slice";
 import { PossibleMove } from './components/PossibleMoves'
 
 function App() {
