@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Square } from "./Sqare";
 import { Walls } from "./Walls";
 import {Camera} from './Camera'
+import {ActiveWall} from "./ActiveWall";
 
 export const Board = () => {
     const size = useSelector((state) => state.board.size);
@@ -17,17 +18,18 @@ export const Board = () => {
                         <Square i={i} j={j}/>
                         {(i < size - 1) && <Walls i={i} j={j} horizontal/>}
                         {(j < size - 1) && <Walls i={i} j={j}/>}
-                        {
-
-                        }
                     </Fragment>
                 )
             }
         }
 
-        // board.push(
-        //     <ActiveWall key={'TEST'} i={0} j={1} />
-        // )
+        board.push(
+            <ActiveWall key={'TEST'} xPosition={5} yPosition={1} />
+        )
+
+        board.push(
+            <ActiveWall key={'TEST2'} xPosition={3} yPosition={3} horizontal />
+        )
 
         return board;
     }

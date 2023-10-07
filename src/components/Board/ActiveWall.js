@@ -1,29 +1,31 @@
-import { useState, useEffect } from "react";
+const xStartVer = -4.1;
+const xStepVer = 1.06;
+const yStartVer = -4.4;
+const yStepVer = 1.1;
 
-export const ActiveWall = ({ i, j, horizontal }) => {
-    const [userData, setUserData] = useState({ chessPosition: { row: 0, column: 0 }, ground: true, droppable: false });
+const xStartHor = -3.85;
+const xStepHor = 1;
+const yStartHor = -3.4;
+const yStepHor = 0.98;
 
-    useEffect(() => {
-        setUserData({ ...userData, position: { row: i, column: j } });
-    }, [i, j])
+export const ActiveWall = ({ xPosition, yPosition, horizontal }) => {
+    const xPos = xStartVer + xPosition * (xStepVer);
+    const zPos = yStartVer + yPosition * (yStepVer);
 
-    const xPos = 4 - i * (1 + 0.1);
-    const zPos = 2 - j * (1 + 0.1);
-
-    const xPosHor = 3.45 - i * (1 + 0.1);
-    const zPosHor = 3.5 - j * (1 + 0.1);
+    const xPosHor = xStartHor + xPosition * (xStepHor);
+    const zPosHor = yStartHor + yPosition * (yStepHor);
 
     const rotation = horizontal ? [0, 0, 0] : [0, -Math.PI / 2, 0];
 
-    const final = horizontal ? [xPosHor, -0.4, zPosHor] : [xPos, 0.4, zPos];
+    const final = horizontal ? [xPosHor, 1, zPosHor] : [xPos, 0.4, zPos];
 
     return (
         <mesh
             position={final}
             rotation={rotation}
         >
-            <boxGeometry attach="geometry" args={[0.1, 1, 1]} />
-            <meshBasicMaterial attach="material" color={'#00ff00'} />
+            <boxGeometry attach="geometry" args={[0.1, 0.5, 2.2]} />
+            <meshBasicMaterial attach="material" color={'#eb7a34'} />
         </mesh>
     )
 }
