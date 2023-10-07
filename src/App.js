@@ -3,28 +3,26 @@ import {Board} from "./components/Board";
 import { Player } from "./components/Player";
 import { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {PlayerController} from "./features/player/Player";
-import {addPlayer} from "./features/game/slice";
+import {addPlayer, setActivePlayer, start} from "./features/game/slice";
 
 function App() {
     const dispatch = useDispatch();
-    const players = useSelector((state) => state.game.players);
+    const game = useSelector((state) => state.game);
+
+    console.log('MY_REG game: ', game);
 
     useEffect(() => {
-        const player1 = new PlayerController({
-            name: 'player 1',
-            position: [0, 0]
-        });
-        const player2 = new PlayerController({
-            name: 'player 2',
-            position: [1, 1]
-        });
-
-        dispatch(addPlayer(player1));
-        dispatch(addPlayer(player2));
+        dispatch(addPlayer({
+            name: 'player1',
+            position: [9, 5]
+        }));
+        dispatch(addPlayer({
+            name: 'player2',
+            position: [0, 5]
+        }));
+        dispatch(setActivePlayer('player1'));
+        dispatch(start());
     }, []);
-
-    console.log('MY_REG players: ', players);
 
     return (
         <>

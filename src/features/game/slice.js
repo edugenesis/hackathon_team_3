@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isReady: false,
-    players: []
+    players: [],
 };
 
 export const gameSlice = createSlice({
@@ -14,19 +14,28 @@ export const gameSlice = createSlice({
         },
         addPlayer: (state, action) => {
             const hasPlayer = state.players.some(r => {
-                return r.name === action.payload.name;
+                return r === action.payload.name;
             });
             
             if (!hasPlayer) {
                 state.players = [
                     ...state.players,
-                    action.payload,
-                ]
+                    action.payload.name,
+                ];
+
+                state[action.payload.name] = action.payload.position;
             }
+        },
+        setActivePlayer: (state, action) => {
+            state.activePlayer = action.payload;
         }
     },
 });
 
-export const { start, addPlayer } = gameSlice.actions;
+export const {
+    start,
+    addPlayer ,
+    setActivePlayer,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;
