@@ -7,16 +7,15 @@ import {addPlayer, setActivePlayer, start} from "./features/game/slice";
 
 function App() {
     const dispatch = useDispatch();
-    const game = useSelector((state) => state.game);
 
     useEffect(() => {
         dispatch(addPlayer({
             name: 'player1',
-            position: [9, 5]
+            position: [4, 8]
         }));
         dispatch(addPlayer({
             name: 'player2',
-            position: [0, 5]
+            position: [4, 0]
         }));
         dispatch(setActivePlayer('player1'));
         dispatch(start());
