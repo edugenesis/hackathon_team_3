@@ -7,4 +7,7 @@ export const store = configureStore({
         board: boardReducer,
         game: gameReducer,
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false,
+    }),
 });
