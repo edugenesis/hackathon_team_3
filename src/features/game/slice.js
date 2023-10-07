@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { directions } from './constants';
+
 const initialState = {
     isReady: false,
     players: [],
+    possibleMoves: [],
     activeWalls: [],
 };
 
@@ -32,6 +35,33 @@ export const gameSlice = createSlice({
         },
         setActivePlayer: (state, { payload }) => {
             state.activePlayer = payload;
+        },
+        getPossibleMoves: (state, action) => {
+            const currentPlayerPosition = state[action.payload.playerName];
+            const row = currentPlayerPosition.position[0];
+            const column = currentPlayerPosition.position[1];
+
+            for (const direction of directions) {
+                const newRow = row + direction.row;
+                const newColumn = column + direction.column;
+
+                if (newRow >= 0 && newRow <= 8 && newColumn >= 0 && newColumn <= 8) {
+                    const newPossibleMove = { row: newRow, column: newColumn };
+                    state.possibleMoves = [...state.possibleMoves, newPossibleMove]
+                }
+            }
+        },
+        setPlayerMove: (state, action) => {
+            const currentPlayer = state[state.activePlayer];
+            const isUserClickingOnPossibleMove = state.possibleMoves.some(move =>
+                move.row === action.payload.row && move.column === action.payload.column);
+
+            if (!isUserClickingOnPossibleMove) return
+
+            currentPlayer.position = [action.payload.row, action.payload.column];
+
+            state.possibleMoves = [];
+            state.activePlayer = state.activePlayer === 'player1' ? 'player2' : 'player1';
         },
         addActiveWall: (state, { payload }) => {
             const [newX, newY] = payload.position;
@@ -70,7 +100,7 @@ export const gameSlice = createSlice({
             } else {
                 console.log('MY_REG 666: ', 666);
             }
-        },
+        }
     },
 });
 
@@ -79,6 +109,8 @@ export const {
     addPlayer ,
     setActivePlayer,
     addActiveWall,
+    getPossibleMoves,
+    setPlayerMove,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

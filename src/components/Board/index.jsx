@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import { useSelector } from 'react-redux';
 import { Square } from "./Sqare";
 import { Walls } from "./Walls";
-import {Camera} from './Camera'
+import {Camera} from './Camera';
+
 import {ActiveWall} from "./ActiveWall";
 import { Environment } from '@react-three/drei'
 
