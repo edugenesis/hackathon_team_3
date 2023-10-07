@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     isReady: false,
     players: [],
-    activeWalls: [],
+    activeWalls: [{"position":[0,1]},{"position":[1,0],"horizontal":true}],
 };
 
 export const gameSlice = createSlice({
