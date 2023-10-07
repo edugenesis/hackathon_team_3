@@ -30,13 +30,46 @@ export const gameSlice = createSlice({
                 };
             }
         },
-        setActivePlayer: (state, action) => {
-            state.activePlayer = action.payload;
+        setActivePlayer: (state, { payload }) => {
+            state.activePlayer = payload;
         },
-        addActiveWall: (state, action) => {
-            // TODO: чекнути чи можна ставити стіну
-            console.log('MY_REG action: ', action);
-            state.activeWalls.push(action.payload)
+        addActiveWall: (state, { payload }) => {
+            const [newX, newY] = payload.position;
+
+            const preventSetWall = [...state.activeWalls].some(({position: [x, y]}) => {
+                if (x === newX && y === newY) {
+                    return true;
+                }
+
+                if (x + 1 === newX && y === newY) {
+                    return true;
+                }
+
+                if (x === newX && y + 1 === newY) {
+                    return true;
+                }
+
+                if (x - 1 === newX && y === newY) {
+                    return true;
+                }
+
+                if (x === newX && y - 1 === newY) {
+                    return true;
+                }
+
+                return false
+            });
+
+            if (!preventSetWall) {
+                const activePlayerIndex = state.players.indexOf(state.activePlayer);
+
+                const newActivePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
+
+                state.activeWalls.push(payload);
+                state.activePlayer = state.players[newActivePlayerIndex];
+            } else {
+                console.log('MY_REG 666: ', 666);
+            }
         },
     },
 });

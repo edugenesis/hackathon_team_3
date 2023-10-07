@@ -9,8 +9,7 @@ import { Environment } from '@react-three/drei'
 export const Board = () => {
     const size = useSelector((state) => state.board.size);
     const activeWalls = useSelector((state) => state.game.activeWalls);
-    
-    console.log('MY_REG activeWalls: ', activeWalls);
+    const activePlayer = useSelector((state) => state.game.activePlayer);
 
     const renderBoard = () => {
         const board = [];
